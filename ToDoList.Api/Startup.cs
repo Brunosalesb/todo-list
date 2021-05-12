@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Linq;
@@ -13,6 +14,13 @@ namespace ToDoList.Api
 {
     public class Startup
     {
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
+
+        public IConfiguration Configuration { get; }
+
         public void ConfigureServices(IServiceCollection services)
         {
             //evitar problemas com CrossOrigin
@@ -25,7 +33,8 @@ namespace ToDoList.Api
                 opt.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(new[] { "application/json" });
             });
 
-            services.AddDbContext<DataContext>(opt => opt.UseSqlServer(@"Server=localhost,1433;Database=ToDo;User Id=SA;Password=1q2w3e4r@#$;"));
+            //services.AddDbContext<DataContext>(opt => opt.UseSqlServer(@"Server=localhost,1433;Database=ToDo;User Id=SA;Password=1q2w3e4r@#$;"));
+            services.AddDbContext<DataContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("connectionString")));
 
             //AddScoped garante que só tem 1 dataContext por requisicao, e quando a requisicao acaba, trata de destruir o dataContext, assim destruindo a conexao com o banco de dados
             services.AddScoped<IToDoAppService, ToDoAppService>();
