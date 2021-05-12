@@ -11,6 +11,7 @@ namespace ToDoList.Infra.Mappings
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Description).IsRequired();
             builder.Property(x => x.CreateDate).IsRequired();
+            builder.Property(x => x.LastUpdateDate);
             builder.Property(x => x.Done).IsRequired();
         }
     }

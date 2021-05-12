@@ -1,4 +1,5 @@
 ﻿using System;
+using ToDoList.Domain.Commands.Requests;
 
 namespace ToDoList.Domain.Entities
 {
@@ -8,12 +9,19 @@ namespace ToDoList.Domain.Entities
         {
             Description = description;
             CreateDate = DateTime.Now;
-            Done = false;
         }
 
         public int Id { get; private set; }
         public string Description { get; private set; }
         public DateTime CreateDate { get; private set; }
-        public bool Done { get; private set; }
+        public DateTime? LastUpdateDate { get; private set; }
+        public bool Done { get; private set; } = false;
+
+        public void Atualizar(UpdateToDoRequest req)
+        {
+            Description = req.Description;
+            Done = req.Done;
+            LastUpdateDate = DateTime.Now;
+        }
     }
 }

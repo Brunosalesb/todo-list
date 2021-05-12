@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Linq;
+using ToDoList.AppService;
+using ToDoList.Domain.Interfaces;
 using ToDoList.Infra.Contexts;
 
 namespace ToDoList.Api
@@ -24,6 +26,9 @@ namespace ToDoList.Api
             });
 
             services.AddDbContext<DataContext>(opt => opt.UseSqlServer(@"Server=localhost,1433;Database=ToDo;User Id=SA;Password=1q2w3e4r@#$;"));
+
+            //AddScoped garante que só tem 1 dataContext por requisicao, e quando a requisicao acaba, trata de destruir o dataContext, assim destruindo a conexao com o banco de dados
+            services.AddScoped<IToDoAppService, ToDoAppService>();
 
             services.AddControllers();
         }

@@ -1,27 +1,90 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Threading.Tasks;
+using System.Collections.Generic;
+using ToDoList.Domain.Commands.Requests;
 using ToDoList.Domain.Entities;
-using ToDoList.Infra.Contexts;
+using ToDoList.Domain.Interfaces;
 
 namespace ToDoList.Api.Controllers
 {
     [ApiController]
-    [Route("toDo")]
+    [Route("toDo/")]
     public class ToDoController : ControllerBase
     {
-        private readonly DataContext _context;
-        public ToDoController(DataContext context)
+        private readonly IToDoAppService _appService;
+        public ToDoController(IToDoAppService appService)
         {
-            _context = context;
+            _appService = appService;
+        }
+
+        [HttpGet]
+        public ActionResult<List<ToDo>> GetAll()
+        {
+            try
+            {
+                var toDoList = _appService.GetAll();
+                return Ok(toDoList);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+
+        [HttpGet("{id:int}")]
+        public ActionResult<List<ToDo>> GetById([FromRoute] int id)
+        {
+            try
+            {
+                var toDo = _appService.GetById(id);
+                return Ok(toDo);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
         }
 
         [HttpPost]
-        public async Task<ActionResult<ToDo>> PostTodoItem(ToDo req)
+        public ActionResult<ToDo> Post([FromBody] ToDo req)
         {
-            _context.ToDo.Add(req);
-            await _context.SaveChangesAsync();
-            return Ok(req);
+            try
+            {
+                var toDo = _appService.Post(req);
+                return Ok(toDo);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+
+        [HttpPut]
+        public ActionResult<ToDo> Update([FromBody] UpdateToDoRequest req)
+        {
+            try
+            {
+                var toDo = _appService.Update(req);
+                return Ok(toDo);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+
+        [HttpDelete("{id:int}")]
+        public ActionResult<string> DeleteById([FromRoute] int id)
+        {
+            try
+            {
+                _appService.DeleteById(id);
+                return Ok(new { message = "To do successfully deleted" });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
         }
     }
 }
