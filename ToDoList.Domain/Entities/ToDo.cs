@@ -26,7 +26,7 @@ namespace ToDoList.Domain.Entities
         public DateTime? LastUpdateDate { get; private set; }
         public bool Done { get; private set; } = false;
 
-        public void Atualizar(UpdateToDoRequest req)
+        public void Update(UpdateToDoRequest req)
         {
             Description = req.Description;
             Done = req.Done;

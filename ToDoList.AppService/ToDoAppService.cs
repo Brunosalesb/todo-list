@@ -11,34 +11,31 @@ namespace ToDoList.AppService
 {
     public class ToDoAppService : IToDoAppService
     {
-        private readonly DataContext _context;
         private readonly IToDoRepository _repository;
 
-        public ToDoAppService(DataContext context, IToDoRepository repository)
+        public ToDoAppService(IToDoRepository repository)
         {
-            _context = context;
             _repository = repository;
         }
 
         public void DeleteById(int id)
         {
-            var toDo = _context.ToDo.FirstOrDefault(x => x.Id == id);
+            var toDo = _repository.GetById(id);
             if (toDo == null)
                 return;
 
-            _context.ToDo.Remove(toDo);
-            _context.SaveChanges();
+            _repository.Delete(toDo);
         }
 
         public ICollection<ToDo> GetAll()
         {
-            var toDoList = _context.ToDo.AsNoTracking().ToList();
+            var toDoList = _repository.GetAll();
             return toDoList;
         }
 
         public ToDo GetById(int id)
         {
-            var toDo = _context.ToDo.AsNoTracking().FirstOrDefault(x => x.Id == id);
+            var toDo = _repository.GetByIdAsNoTracking(id);
             return toDo;
         }
 
@@ -46,21 +43,18 @@ namespace ToDoList.AppService
         {
             var toDo = new ToDo(req);
             _repository.Create(toDo);
-            _context.SaveChanges();
             return toDo;
         }
 
         public ToDo Update(UpdateToDoRequest req)
         {
-            var toDo = _context.ToDo.FirstOrDefault(x => x.Id == req.Id);
+            var toDo = _repository.GetById(req.Id);
 
             if (toDo == null)
                 return null;
 
-            toDo.Atualizar(req);
-
-            _context.Entry(toDo).State = EntityState.Modified;
-            _context.SaveChanges();
+            toDo.Update(req);
+            _repository.Update(toDo);
             return toDo;
         }
     }

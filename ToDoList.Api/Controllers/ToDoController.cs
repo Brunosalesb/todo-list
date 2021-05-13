@@ -79,7 +79,7 @@ namespace ToDoList.Api.Controllers
             try
             {
                 _appService.DeleteById(id);
-                return Ok(new { message = "To do successfully deleted" });
+                return Ok(new { message = "ToDo successfully deleted" });
             }
             catch (Exception ex)
             {
