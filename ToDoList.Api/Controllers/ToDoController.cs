@@ -46,7 +46,7 @@ namespace ToDoList.Api.Controllers
         }
 
         [HttpPost]
-        public ActionResult<ToDo> Post([FromBody] ToDo req)
+        public ActionResult<ToDo> Post([FromBody] CreateToDoRequest req)
         {
             try
             {
