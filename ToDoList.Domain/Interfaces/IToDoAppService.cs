@@ -9,7 +9,7 @@ namespace ToDoList.Domain.Interfaces
     {
         ICollection<ToDo> GetAll();
         ToDo GetById(int id);
-        ToDo Post(ToDo req);
+        ToDo Post(CreateToDoRequest req);
         ToDo Update(UpdateToDoRequest req);
         void DeleteById(int id);
     }

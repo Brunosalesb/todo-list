@@ -5,9 +5,18 @@ namespace ToDoList.Domain.Entities
 {
     public class ToDo
     {
-        public ToDo(string description)
+        public ToDo()
         {
-            Description = description;
+            // ef needs this constructor even though it is never called by 
+            // my code in the application. EF needs it to set up the contexts
+
+            // Failure to have it will result in a 
+            //  No suitable constructor found for entity type 'Company'. exception
+        }
+        public ToDo(CreateToDoRequest req)
+        {
+            Description = req.Description;
+            Done = req.Done;
             CreateDate = DateTime.Now;
         }
 

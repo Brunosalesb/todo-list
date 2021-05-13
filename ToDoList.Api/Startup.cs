@@ -9,6 +9,7 @@ using System.Linq;
 using ToDoList.AppService;
 using ToDoList.Domain.Interfaces;
 using ToDoList.Infra.Contexts;
+using ToDoList.Infra.Repositories;
 
 namespace ToDoList.Api
 {
@@ -38,6 +39,7 @@ namespace ToDoList.Api
 
             //AddScoped garante que só tem 1 dataContext por requisicao, e quando a requisicao acaba, trata de destruir o dataContext, assim destruindo a conexao com o banco de dados
             services.AddScoped<IToDoAppService, ToDoAppService>();
+            services.AddScoped<IToDoRepository, ToDoRepository>();
 
             services.AddControllers();
         }
