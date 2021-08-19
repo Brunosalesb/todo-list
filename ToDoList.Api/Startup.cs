@@ -1,15 +1,11 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.ResponseCompression;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Linq;
-using ToDoList.AppService;
-using ToDoList.Domain.Interfaces;
-using ToDoList.Infra.Contexts;
-using ToDoList.Infra.Repositories;
+using ToDoList.Api.Configuration;
 
 namespace ToDoList.Api
 {
@@ -25,7 +21,9 @@ namespace ToDoList.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
             services.AddApiVersioning();
+            
             services.AddCors();
 
             services.AddResponseCompression(opt =>
@@ -34,13 +32,11 @@ namespace ToDoList.Api
                 opt.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(new[] { "application/json" });
             });
 
-            ConfigureDataContext(services);
+            services.AddDataContextConfiguration(Configuration);
 
-            ConfigureAppServiceDependencyInjection(services);
+            services.AddDependencyInjectionConfiguration();
 
-            ConfigureRepositoryDependencyInjection(services);
-
-            services.AddSwaggerGen();
+            services.AddSwaggerConfiguration();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -50,48 +46,18 @@ namespace ToDoList.Api
                 app.UseDeveloperExceptionPage();
             }
 
-            //forçar api responder sobre https
             app.UseHttpsRedirection();
 
-            //utilizar roteamento
             app.UseRouting();
 
-            //chamadas localhost
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
-            //mapeamento dos endpoints
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
 
-            ConfigureSwagger(app);
-        }
-
-        public void ConfigureAppServiceDependencyInjection(IServiceCollection services)
-        {
-            services.AddScoped<IToDoAppService, ToDoAppService>();
-        }
-
-        public void ConfigureRepositoryDependencyInjection(IServiceCollection services)
-        {
-            services.AddScoped<IToDoRepository, ToDoRepository>();
-        }
-
-        public void ConfigureDataContext(IServiceCollection services)
-        {
-            services.AddDbContext<DataContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("connectionString")));
-        }
-
-        public void ConfigureSwagger(IApplicationBuilder app)
-        {
-            app.UseSwagger();
-
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "ToDo API");
-                c.RoutePrefix = string.Empty;
-            });
+            app.UseSwaggerConfiguration();
         }
     }
 }
