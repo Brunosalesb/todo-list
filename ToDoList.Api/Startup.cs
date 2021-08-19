@@ -24,25 +24,23 @@ namespace ToDoList.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-            //evitar problemas com CrossOrigin
+            services.AddControllers();
+            services.AddApiVersioning();
             services.AddCors();
 
-            //comprimir JSON antes de enviar para a tela
             services.AddResponseCompression(opt =>
             {
                 opt.Providers.Add<GzipCompressionProvider>();
                 opt.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(new[] { "application/json" });
             });
 
-            //services.AddDbContext<DataContext>(opt => opt.UseSqlServer(@"Server=localhost,1433;Database=ToDo;User Id=SA;Password=1q2w3e4r@#$;"));
-            services.AddDbContext<DataContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("connectionString")));
+            ConfigureDataContext(services);
 
-            //AddScoped garante que só tem 1 dataContext por requisicao, e quando a requisicao acaba, trata de destruir o dataContext, assim destruindo a conexao com o banco de dados
-            services.AddScoped<IToDoAppService, ToDoAppService>();
-            services.AddScoped<IToDoRepository, ToDoRepository>();
+            ConfigureAppServiceDependencyInjection(services);
 
-            services.AddControllers();
-            services.AddApiVersioning();
+            ConfigureRepositoryDependencyInjection(services);
+
+            services.AddSwaggerGen();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -65,6 +63,34 @@ namespace ToDoList.Api
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+
+            ConfigureSwagger(app);
+        }
+
+        public void ConfigureAppServiceDependencyInjection(IServiceCollection services)
+        {
+            services.AddScoped<IToDoAppService, ToDoAppService>();
+        }
+
+        public void ConfigureRepositoryDependencyInjection(IServiceCollection services)
+        {
+            services.AddScoped<IToDoRepository, ToDoRepository>();
+        }
+
+        public void ConfigureDataContext(IServiceCollection services)
+        {
+            services.AddDbContext<DataContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("connectionString")));
+        }
+
+        public void ConfigureSwagger(IApplicationBuilder app)
+        {
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "ToDo API");
+                c.RoutePrefix = string.Empty;
             });
         }
     }
