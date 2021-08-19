@@ -1,4 +1,4 @@
-﻿namespace ToDoList.Domain.Commands.Requests
+﻿namespace ToDoList.Domain.Contracts.Request
 {
     public class CreateToDoRequest
     {

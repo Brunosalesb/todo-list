@@ -5,7 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Commands\Responses\" />
+    <Compile Remove="SqlServer\Contracts\Responses\**" />
+    <EmbeddedResource Remove="SqlServer\Contracts\Responses\**" />
+    <None Remove="SqlServer\Contracts\Responses\**" />
   </ItemGroup>
 
 </Project>

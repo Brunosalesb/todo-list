@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31205.134
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoList.Domain", "ToDoList.Domain\ToDoList.Domain.csproj", "{154BCE30-4B6D-48E0-A0E1-3CDBBA21E0D9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoList.Domain", "ToDoList.Domain\ToDoList.Domain.csproj", "{154BCE30-4B6D-48E0-A0E1-3CDBBA21E0D9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoList.Infra", "ToDoList.Data\ToDoList.Infra.csproj", "{B8472EBD-A28E-485E-B868-8C9EEB044499}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoList.Data", "ToDoList.Data\ToDoList.Data.csproj", "{B8472EBD-A28E-485E-B868-8C9EEB044499}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoList.Api", "ToDoList.Api\ToDoList.Api.csproj", "{ECE8010D-565A-462B-9D9D-7DA7E964ED87}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoList.Api", "ToDoList.Api\ToDoList.Api.csproj", "{ECE8010D-565A-462B-9D9D-7DA7E964ED87}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoList.AppService", "ToDoList.AppService\ToDoList.AppService.csproj", "{CA421037-9A0A-4F91-8912-A5F43477CCC1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoList.AppService", "ToDoList.AppService\ToDoList.AppService.csproj", "{CA421037-9A0A-4F91-8912-A5F43477CCC1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

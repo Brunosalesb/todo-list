@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using ToDoList.Domain.Entities;
 using ToDoList.Domain.Interfaces;
 using ToDoList.Infra.Contexts;
@@ -14,37 +15,37 @@ namespace ToDoList.Infra.Repositories
         {
             _context = context;
         }
-        public void Create(ToDo toDo)
+        public async Task Create(ToDo toDo)
         {
-            _context.ToDo.Add(toDo);
-            _context.SaveChanges();
+            await _context.ToDo.AddAsync(toDo);
+            await _context.SaveChangesAsync();
         }
 
-        public void Delete(ToDo toDo)
+        public async Task Delete(ToDo toDo)
         {
             _context.ToDo.Remove(toDo);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public ICollection<ToDo> GetAll()
+        public async Task<ICollection<ToDo>> GetAll()
         {
-            return _context.ToDo.AsNoTracking().ToList();
+            return await _context.ToDo.AsNoTracking().ToListAsync();
         }
 
-        public ToDo GetById(int id)
+        public async Task<ToDo> GetById(int id)
         {
-            return _context.ToDo.FirstOrDefault(x => x.Id == id);
+            return await _context.ToDo.FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public ToDo GetByIdAsNoTracking(int id)
+        public async Task<ToDo> GetByIdAsNoTracking(int id)
         {
-            return _context.ToDo.AsNoTracking().FirstOrDefault(x => x.Id == id);
+            return await _context.ToDo.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public void Update(ToDo toDo)
+        public async Task Update(ToDo toDo)
         {
             _context.Entry(toDo).State = EntityState.Modified;
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
     }
 }

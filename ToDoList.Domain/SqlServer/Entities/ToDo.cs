@@ -1,5 +1,5 @@
 ﻿using System;
-using ToDoList.Domain.Commands.Requests;
+using ToDoList.Domain.Contracts.Request;
 
 namespace ToDoList.Domain.Entities
 {

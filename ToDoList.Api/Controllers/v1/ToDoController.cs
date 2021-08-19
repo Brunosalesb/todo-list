@@ -1,14 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using ToDoList.Domain.Commands.Requests;
-using ToDoList.Domain.Entities;
+using System.Threading.Tasks;
+using ToDoList.Domain.Contracts.Request;
 using ToDoList.Domain.Interfaces;
 
 namespace ToDoList.Api.Controllers
 {
-    [ApiController]
-    [Route("toDo/")]
+    [ApiVersion("1.0")]
+    [Route("/v{version:apiVersion}/[controller]")]
     public class ToDoController : ControllerBase
     {
         private readonly IToDoAppService _appService;
@@ -18,12 +17,12 @@ namespace ToDoList.Api.Controllers
         }
 
         [HttpGet]
-        public ActionResult<List<ToDo>> GetAll()
+        public async Task<IActionResult> GetAll()
         {
             try
             {
-                var toDoList = _appService.GetAll();
-                return Ok(toDoList);
+                var result = await _appService.GetAll();
+                return Ok(result);
             }
             catch (Exception ex)
             {
@@ -31,13 +30,13 @@ namespace ToDoList.Api.Controllers
             }
         }
 
-        [HttpGet("{id:int}")]
-        public ActionResult<List<ToDo>> GetById([FromRoute] int id)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById([FromRoute] int id)
         {
             try
             {
-                var toDo = _appService.GetById(id);
-                return Ok(toDo);
+                var result = await _appService.GetById(id);
+                return Ok(result);
             }
             catch (Exception ex)
             {
@@ -46,12 +45,12 @@ namespace ToDoList.Api.Controllers
         }
 
         [HttpPost]
-        public ActionResult<ToDo> Post([FromBody] CreateToDoRequest req)
+        public async Task<IActionResult> Post([FromBody] CreateToDoRequest req)
         {
             try
             {
-                var toDo = _appService.Post(req);
-                return Ok(toDo);
+                var result = await _appService.Post(req);
+                return Ok(result);
             }
             catch (Exception ex)
             {
@@ -60,12 +59,12 @@ namespace ToDoList.Api.Controllers
         }
 
         [HttpPut]
-        public ActionResult<ToDo> Update([FromBody] UpdateToDoRequest req)
+        public async Task<IActionResult> Update([FromBody] UpdateToDoRequest req)
         {
             try
             {
-                var toDo = _appService.Update(req);
-                return Ok(toDo);
+                var result = await _appService.Update(req);
+                return Ok(result);
             }
             catch (Exception ex)
             {
@@ -73,12 +72,12 @@ namespace ToDoList.Api.Controllers
             }
         }
 
-        [HttpDelete("{id:int}")]
-        public ActionResult<string> DeleteById([FromRoute] int id)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteById([FromRoute] int id)
         {
             try
             {
-                _appService.DeleteById(id);
+                await _appService.DeleteById(id);
                 return Ok(new { message = "ToDo successfully deleted" });
             }
             catch (Exception ex)

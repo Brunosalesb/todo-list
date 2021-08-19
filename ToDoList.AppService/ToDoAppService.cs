@@ -1,11 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Linq;
-using ToDoList.Domain.Commands.Requests;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using ToDoList.Domain.Contracts.Request;
 using ToDoList.Domain.Entities;
+using ToDoList.Domain.Helpers;
 using ToDoList.Domain.Interfaces;
-using ToDoList.Infra.Contexts;
-using ToDoList.Infra.Repositories;
+using ToDoList.Domain.SqlServer.Contracts.Response;
 
 namespace ToDoList.AppService
 {
@@ -18,43 +17,43 @@ namespace ToDoList.AppService
             _repository = repository;
         }
 
-        public void DeleteById(int id)
+        public async Task DeleteById(int id)
         {
-            var toDo = _repository.GetById(id);
+            var toDo = await _repository.GetById(id);
             if (toDo == null)
                 return;
 
-            _repository.Delete(toDo);
+            await _repository.Delete(toDo);
         }
 
-        public ICollection<ToDo> GetAll()
+        public async Task<ICollection<GetAllToDoResponse>> GetAll()
         {
-            var toDoList = _repository.GetAll();
-            return toDoList;
+            var toDoList = await _repository.GetAll();
+            return MapperExtension.MapGetAllToDoResponse(toDoList);
         }
 
-        public ToDo GetById(int id)
+        public async Task<ToDo> GetById(int id)
         {
-            var toDo = _repository.GetByIdAsNoTracking(id);
+            var toDo = await _repository.GetByIdAsNoTracking(id);
             return toDo;
         }
 
-        public ToDo Post(CreateToDoRequest req)
+        public async Task<ToDo> Post(CreateToDoRequest request)
         {
-            var toDo = new ToDo(req);
-            _repository.Create(toDo);
+            var toDo = new ToDo(request);
+            await _repository.Create(toDo);
             return toDo;
         }
 
-        public ToDo Update(UpdateToDoRequest req)
+        public async Task<ToDo> Update(UpdateToDoRequest request)
         {
-            var toDo = _repository.GetById(req.Id);
+            var toDo = await _repository.GetById(request.Id);
 
             if (toDo == null)
                 return null;
 
-            toDo.Update(req);
-            _repository.Update(toDo);
+            toDo.Update(request);
+            await _repository.Update(toDo);
             return toDo;
         }
     }

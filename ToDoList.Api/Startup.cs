@@ -42,6 +42,7 @@ namespace ToDoList.Api
             services.AddScoped<IToDoRepository, ToDoRepository>();
 
             services.AddControllers();
+            services.AddApiVersioning();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
