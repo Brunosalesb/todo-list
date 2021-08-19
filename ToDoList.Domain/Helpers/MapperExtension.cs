@@ -25,5 +25,16 @@ namespace ToDoList.Domain.Helpers
                 Done = response.Done
             };
         }
+
+        public static GetByIdToDoResponse MapGetByIdToDoResponse(ToDo response)
+        {
+            return new GetByIdToDoResponse()
+            {
+                Id = response.Id,
+                Description = response.Description,
+                CreateDate = response.CreateDate,
+                Done = response.Done
+            };
+        }
     }
 }

@@ -13,10 +13,10 @@ namespace ToDoList.Domain.Entities
             // Failure to have it will result in a 
             //  No suitable constructor found for entity type 'Company'. exception
         }
-        public ToDo(CreateToDoRequest req)
+        public ToDo(CreateToDoRequest request)
         {
-            Description = req.Description;
-            Done = req.Done;
+            Description = request.Description;
+            Done = request.Done;
             CreateDate = DateTime.Now;
         }
 
@@ -26,10 +26,10 @@ namespace ToDoList.Domain.Entities
         public DateTime? LastUpdateDate { get; private set; }
         public bool Done { get; private set; } = false;
 
-        public void Update(UpdateToDoRequest req)
+        public void Update(UpdateToDoRequest request)
         {
-            Description = req.Description;
-            Done = req.Done;
+            Description = request.Description;
+            Done = request.Done;
             LastUpdateDate = DateTime.Now;
         }
     }

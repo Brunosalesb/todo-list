@@ -45,12 +45,12 @@ namespace ToDoList.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] CreateToDoRequest req)
+        public async Task<IActionResult> Post([FromBody] CreateToDoRequest request)
         {
             try
             {
-                var result = await _appService.Post(req);
-                return Ok(result);
+                await _appService.Post(request);
+                return Ok(new { message = "ToDo successfully created" });
             }
             catch (Exception ex)
             {
@@ -59,12 +59,12 @@ namespace ToDoList.Api.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> Update([FromBody] UpdateToDoRequest req)
+        public async Task<IActionResult> Update([FromBody] UpdateToDoRequest request)
         {
             try
             {
-                var result = await _appService.Update(req);
-                return Ok(result);
+                await _appService.Update(request);
+                return Ok(new { message = "ToDo successfully updated" });
             }
             catch (Exception ex)
             {
