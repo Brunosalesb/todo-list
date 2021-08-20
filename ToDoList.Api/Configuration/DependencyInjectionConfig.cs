@@ -12,12 +12,24 @@ namespace ToDoList.Api.Configuration
     {
         public static void AddDependencyInjectionConfiguration(this IServiceCollection services)
         {
-            #region Repositories
+            #region Repository
+
             services.AddScoped<IToDoRepository, ToDoRepository>();
+
             #endregion
+
+            #region AppService
+
             services.AddScoped<IToDoAppService, ToDoAppService>();
 
+            #endregion
+
+            #region Validator
+
             services.AddScoped<IValidator<CreateToDoRequest>, CreateToDoRequestValidator>();
+            services.AddScoped<IValidator<UpdateToDoRequest>, UpdateToDoRequestValidator>();
+            
+            #endregion
         }
     }
 }
