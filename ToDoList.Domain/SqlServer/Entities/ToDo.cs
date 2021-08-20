@@ -1,7 +1,7 @@
 ﻿using System;
-using ToDoList.Domain.Contracts.Request;
+using ToDoList.Domain.SqlServer.Contracts.Request;
 
-namespace ToDoList.Domain.Entities
+namespace ToDoList.Domain.SqlServer.Entities
 {
     public class ToDo
     {

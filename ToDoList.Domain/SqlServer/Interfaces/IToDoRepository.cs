@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using ToDoList.Domain.Entities;
+using ToDoList.Domain.SqlServer.Entities;
 
-namespace ToDoList.Domain.Interfaces
+namespace ToDoList.Domain.SqlServer.Interfaces
 {
     public interface IToDoRepository
     {

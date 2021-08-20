@@ -1,9 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using ToDoList.Domain.Entities;
-using ToDoList.Domain.Interfaces;
+using ToDoList.Domain.SqlServer.Entities;
+using ToDoList.Domain.SqlServer.Interfaces;
 using ToDoList.Infra.Contexts;
 
 namespace ToDoList.Infra.Repositories

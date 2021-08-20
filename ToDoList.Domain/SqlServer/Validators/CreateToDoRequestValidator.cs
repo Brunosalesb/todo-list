@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using ToDoList.Domain.Contracts.Request;
+using ToDoList.Domain.SqlServer.Contracts.Request;
 
 namespace ToDoList.Domain.SqlServer.Validators
 {
@@ -7,11 +7,9 @@ namespace ToDoList.Domain.SqlServer.Validators
     {
         public CreateToDoRequestValidator()
         {
-            CascadeMode = CascadeMode.Stop;
-
-            RuleFor(req => req.Description)
+            RuleFor(x => x.Description)
                 .NotNull()
-                .WithErrorCode("Description cannot be null");
+                .NotEmpty();
         }
     }
 }

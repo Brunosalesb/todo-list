@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using ToDoList.Domain.Entities;
 using ToDoList.Domain.SqlServer.Contracts.Response;
+using ToDoList.Domain.SqlServer.Entities;
 
 namespace ToDoList.Domain.Helpers
 {

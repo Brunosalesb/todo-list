@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using ToDoList.Domain.Contracts.Request;
-using ToDoList.Domain.Entities;
 using ToDoList.Domain.Helpers;
-using ToDoList.Domain.Interfaces;
+using ToDoList.Domain.SqlServer.Contracts.Request;
 using ToDoList.Domain.SqlServer.Contracts.Response;
-using ToDoList.Domain.SqlServer.Validators;
+using ToDoList.Domain.SqlServer.Entities;
+using ToDoList.Domain.SqlServer.Interfaces;
 
 namespace ToDoList.AppService
 {
@@ -41,10 +40,6 @@ namespace ToDoList.AppService
 
         public async Task Post(CreateToDoRequest request)
         {
-            var validationResult = new CreateToDoRequestValidator().Validate(request);
-            if (!validationResult.IsValid)
-                return;
-
             var toDo = new ToDo(request);
             await _repository.Create(toDo);
         }
