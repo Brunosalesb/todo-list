@@ -9,9 +9,9 @@ namespace ToDoList.Domain.SqlServer.Interfaces
     public interface IToDoAppService
     {
         Task<ICollection<GetAllToDoResponse>> GetAll();
-        Task<ToDo> GetById(int id);
-        Task<ToDo> Post(CreateToDoRequest req);
-        Task<ToDo> Update(UpdateToDoRequest req);
+        Task<GetByIdToDoResponse> GetById(int id);
+        Task Post(CreateToDoRequest req);
+        Task Update(UpdateToDoRequest req);
         Task DeleteById(int id);
     }
 }

@@ -32,29 +32,27 @@ namespace ToDoList.AppService
             return MapperExtension.MapGetAllToDoResponse(toDoList);
         }
 
-        public async Task<ToDo> GetById(int id)
+        public async Task<GetByIdToDoResponse> GetById(int id)
         {
             var toDo = await _repository.GetByIdAsNoTracking(id);
-            return toDo;
+            return MapperExtension.MapGetByIdToDoResponse(toDo);
         }
 
-        public async Task<ToDo> Post(CreateToDoRequest request)
+        public async Task Post(CreateToDoRequest request)
         {
             var toDo = new ToDo(request);
             await _repository.Create(toDo);
-            return toDo;
         }
 
-        public async Task<ToDo> Update(UpdateToDoRequest request)
+        public async Task Update(UpdateToDoRequest request)
         {
             var toDo = await _repository.GetById(request.Id);
 
             if (toDo == null)
-                return null;
+                return;
 
             toDo.Update(request);
             await _repository.Update(toDo);
-            return toDo;
         }
     }
 }

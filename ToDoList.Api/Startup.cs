@@ -5,7 +5,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ToDoList.Api.Configuration;
-using ToDoList.Domain.SqlServer.Validators;
 
 namespace ToDoList.Api
 {
@@ -20,7 +19,7 @@ namespace ToDoList.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers().AddFluentValidation(x => x.ValidatorOptions.LanguageManager.Culture = new System.Globalization.CultureInfo("en-US"));
 
             services.AddApiVersioning();
 
@@ -38,6 +37,7 @@ namespace ToDoList.Api
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseSwaggerConfiguration();
             }
 
             app.UseHttpsRedirection();
@@ -51,7 +51,6 @@ namespace ToDoList.Api
                 endpoints.MapControllers();
             });
 
-            app.UseSwaggerConfiguration();
         }
     }
 }
