@@ -1,11 +1,11 @@
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System.Linq;
 using ToDoList.Api.Configuration;
+using ToDoList.Domain.SqlServer.Validators;
 
 namespace ToDoList.Api
 {
@@ -23,14 +23,8 @@ namespace ToDoList.Api
             services.AddControllers();
 
             services.AddApiVersioning();
-            
-            services.AddCors();
 
-            services.AddResponseCompression(opt =>
-            {
-                opt.Providers.Add<GzipCompressionProvider>();
-                opt.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(new[] { "application/json" });
-            });
+            services.AddCors();
 
             services.AddDataContextConfiguration(Configuration);
 

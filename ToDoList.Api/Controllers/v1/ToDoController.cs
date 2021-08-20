@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
-using ToDoList.Domain.Contracts.Request;
-using ToDoList.Domain.Interfaces;
+using ToDoList.Domain.SqlServer.Contracts.Request;
+using ToDoList.Domain.SqlServer.Interfaces;
 
 namespace ToDoList.Api.Controllers
 {

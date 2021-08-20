@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using ToDoList.Domain.Entities;
+using ToDoList.Domain.SqlServer.Entities;
 
 namespace ToDoList.Infra.Mappings
 {

@@ -1,7 +1,6 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using ToDoList.AppService;
-using ToDoList.Domain.Interfaces;
+using ToDoList.Domain.SqlServer.Interfaces;
 using ToDoList.Infra.Repositories;
 
 namespace ToDoList.Api.Configuration

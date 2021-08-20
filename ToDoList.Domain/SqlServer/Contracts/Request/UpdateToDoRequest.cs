@@ -1,4 +1,4 @@
-﻿namespace ToDoList.Domain.Contracts.Request
+﻿namespace ToDoList.Domain.SqlServer.Contracts.Request
 {
     public class UpdateToDoRequest
     {

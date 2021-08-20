@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using ToDoList.Domain.Contracts.Request;
-using ToDoList.Domain.Entities;
+using ToDoList.Domain.SqlServer.Contracts.Request;
 using ToDoList.Domain.SqlServer.Contracts.Response;
+using ToDoList.Domain.SqlServer.Entities;
 
-namespace ToDoList.Domain.Interfaces
+namespace ToDoList.Domain.SqlServer.Interfaces
 {
     public interface IToDoAppService
     {

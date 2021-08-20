@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ToDoList.Domain.Entities;
+using ToDoList.Domain.SqlServer.Entities;
 using ToDoList.Infra.Mappings;
 
 namespace ToDoList.Infra.Contexts
