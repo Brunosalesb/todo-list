@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using ToDoList.Domain.SqlServer.Contracts.Request;
 using ToDoList.Domain.SqlServer.Contracts.Response;
-using ToDoList.Domain.SqlServer.Entities;
 
 namespace ToDoList.Domain.SqlServer.Interfaces
 {

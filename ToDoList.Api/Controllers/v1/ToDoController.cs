@@ -23,7 +23,7 @@ namespace ToDoList.Api.Controllers
             try
             {
                 var result = await _appService.GetAll();
-                return Ok(result);
+                return Ok(new { success = true, data = result });
             }
             catch (Exception ex)
             {
@@ -37,7 +37,7 @@ namespace ToDoList.Api.Controllers
             try
             {
                 var result = await _appService.GetById(id);
-                return Ok(result);
+                return Ok(new { success = true, data = result });
             }
             catch (Exception ex)
             {
@@ -51,7 +51,7 @@ namespace ToDoList.Api.Controllers
             try
             {
                 await _appService.Post(request);
-                return Ok(new { message = "ToDo successfully created" });
+                return Ok(new { success = true });
             }
             catch (Exception ex)
             {
@@ -65,7 +65,7 @@ namespace ToDoList.Api.Controllers
             try
             {
                 await _appService.Update(request);
-                return Ok(new { message = "ToDo successfully updated" });
+                return Ok(new { success = true });
             }
             catch (Exception ex)
             {
@@ -79,7 +79,7 @@ namespace ToDoList.Api.Controllers
             try
             {
                 await _appService.DeleteById(id);
-                return Ok(new { message = "ToDo successfully deleted" });
+                return Ok(new { success = true });
             }
             catch (Exception ex)
             {
