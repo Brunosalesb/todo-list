@@ -29,13 +29,13 @@ namespace ToDoList.AppService
         public async Task<ICollection<GetAllToDoResponse>> GetAll()
         {
             var toDoList = await _repository.GetAll();
-            return MapperExtension.MapGetAllToDoResponse(toDoList);
+            return toDoList.MapGetAllToDoResponse();
         }
 
         public async Task<GetByIdToDoResponse> GetById(int id)
         {
             var toDo = await _repository.GetByIdAsNoTracking(id);
-            return MapperExtension.MapGetByIdToDoResponse(toDo);
+            return toDo.MapGetByIdToDoResponse();
         }
 
         public async Task Post(CreateToDoRequest request)

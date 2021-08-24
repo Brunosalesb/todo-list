@@ -6,17 +6,17 @@ namespace ToDoList.Domain.Helpers
 {
     public static class MapperExtension
     {
-        public static List<GetAllToDoResponse> MapGetAllToDoResponse(ICollection<ToDo> response)
+        public static List<GetAllToDoResponse> MapGetAllToDoResponse(this ICollection<ToDo> response)
         {
             var result = new List<GetAllToDoResponse>();
 
             foreach (var item in response)
-                result.Add(MapperExtension.MapGetAllToDoResponse(item));
+                result.Add(item.MapGetAllToDoResponse());
 
             return result;
         }
 
-        public static GetAllToDoResponse MapGetAllToDoResponse(ToDo response)
+        private static GetAllToDoResponse MapGetAllToDoResponse(this ToDo response)
         {
             return new GetAllToDoResponse()
             {
@@ -26,7 +26,7 @@ namespace ToDoList.Domain.Helpers
             };
         }
 
-        public static GetByIdToDoResponse MapGetByIdToDoResponse(ToDo response)
+        public static GetByIdToDoResponse MapGetByIdToDoResponse(this ToDo response)
         {
             return new GetByIdToDoResponse()
             {
