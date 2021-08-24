@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using ToDoList.Domain.Helpers;
+using ToDoList.Domain.Shared;
 using ToDoList.Domain.SqlServer.Contracts.Request;
-using ToDoList.Domain.SqlServer.Contracts.Response;
 using ToDoList.Domain.SqlServer.Entities;
 using ToDoList.Domain.SqlServer.Interfaces;
 
@@ -26,15 +25,18 @@ namespace ToDoList.AppService
             await _repository.Delete(toDo);
         }
 
-        public async Task<ICollection<GetAllToDoResponse>> GetAll()
+        public async Task<ResultData> GetAll()
         {
             var toDoList = await _repository.GetAll();
             return toDoList.MapGetAllToDoResponse();
         }
 
-        public async Task<GetByIdToDoResponse> GetById(int id)
+        public async Task<ResultData> GetById(int id)
         {
             var toDo = await _repository.GetByIdAsNoTracking(id);
+            if (toDo == null)
+                return ResultData.;
+
             return toDo.MapGetByIdToDoResponse();
         }
 

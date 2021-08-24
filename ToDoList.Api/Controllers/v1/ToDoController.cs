@@ -23,7 +23,7 @@ namespace ToDoList.Api.Controllers
             try
             {
                 var result = await _appService.GetAll();
-                return Ok(new { success = true, data = result });
+                return Ok(result);
             }
             catch (Exception ex)
             {
@@ -37,7 +37,7 @@ namespace ToDoList.Api.Controllers
             try
             {
                 var result = await _appService.GetById(id);
-                return Ok(new { success = true, data = result });
+                return Ok(result);
             }
             catch (Exception ex)
             {
