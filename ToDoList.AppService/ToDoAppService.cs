@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using ToDoList.Domain.Helpers;
 using ToDoList.Domain.Shared;
+using ToDoList.Domain.Shared.Enums;
 using ToDoList.Domain.SqlServer.Contracts.Request;
 using ToDoList.Domain.SqlServer.Entities;
 using ToDoList.Domain.SqlServer.Interfaces;

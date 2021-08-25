@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace ToDoList.Domain.Shared
+namespace ToDoList.Domain.Shared.Enums
 {
     public enum EGenericOperations
     {
