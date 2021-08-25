@@ -7,7 +7,7 @@ using ToDoList.Domain.SqlServer.Interfaces;
 
 namespace ToDoList.AppService
 {
-    public class ToDoAppService : IToDoAppService
+    public class ToDoAppService : BaseService, IToDoAppService
     {
         private readonly IToDoRepository _repository;
 
@@ -28,6 +28,9 @@ namespace ToDoList.AppService
         public async Task<ResultData> GetAll()
         {
             var toDoList = await _repository.GetAll();
+            if (toDoList == null)
+                return ErrorData(EGenericErrors.No_Records_Found.GetDescription());
+
             return toDoList.MapGetAllToDoResponse();
         }
 
@@ -35,7 +38,7 @@ namespace ToDoList.AppService
         {
             var toDo = await _repository.GetByIdAsNoTracking(id);
             if (toDo == null)
-                return ResultData.;
+                return ErrorData(EGenericErrors.No_Records_Found.GetDescription());
 
             return toDo.MapGetByIdToDoResponse();
         }
