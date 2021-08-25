@@ -8,8 +8,8 @@ namespace ToDoList.Domain.SqlServer.Interfaces
     {
         Task<ResultData> GetAll();
         Task<ResultData> GetById(int id);
-        Task Post(CreateToDoRequest req);
-        Task Update(UpdateToDoRequest req);
-        Task DeleteById(int id);
+        Task<ResultData> Post(CreateToDoRequest req);
+        Task<ResultData> Update(UpdateToDoRequest req);
+        Task<ResultData> DeleteById(int id);
     }
 }

@@ -16,13 +16,14 @@ namespace ToDoList.AppService
             _repository = repository;
         }
 
-        public async Task DeleteById(int id)
+        public async Task<ResultData> DeleteById(int id)
         {
             var toDo = await _repository.GetById(id);
             if (toDo == null)
-                return;
+                return ErrorData(EGenericErrors.No_Records_Found.GetDescription());
 
             await _repository.Delete(toDo);
+            return SuccessData(EGenericOperations.Record_Deleted_Successfully.GetDescription());
         }
 
         public async Task<ResultData> GetAll()
@@ -43,21 +44,24 @@ namespace ToDoList.AppService
             return toDo.MapGetByIdToDoResponse();
         }
 
-        public async Task Post(CreateToDoRequest request)
+        public async Task<ResultData> Post(CreateToDoRequest request)
         {
             var toDo = new ToDo(request);
             await _repository.Create(toDo);
+            return SuccessData(EGenericOperations.Record_Saved_Successfully.GetDescription());
         }
 
-        public async Task Update(UpdateToDoRequest request)
+        public async Task<ResultData> Update(UpdateToDoRequest request)
         {
             var toDo = await _repository.GetById(request.Id);
 
             if (toDo == null)
-                return;
+                return ErrorData(EGenericErrors.No_Records_Found.GetDescription());
 
             toDo.Update(request);
+
             await _repository.Update(toDo);
+            return SuccessData(EGenericOperations.Record_Updated_Successfully.GetDescription());
         }
     }
 }

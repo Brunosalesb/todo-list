@@ -50,8 +50,8 @@ namespace ToDoList.Api.Controllers
         {
             try
             {
-                await _appService.Post(request);
-                return Ok(new { success = true });
+                var result = await _appService.Post(request);
+                return Ok(result);
             }
             catch (Exception ex)
             {
@@ -64,8 +64,8 @@ namespace ToDoList.Api.Controllers
         {
             try
             {
-                await _appService.Update(request);
-                return Ok(new { success = true });
+                var result = await _appService.Update(request);
+                return Ok(result);
             }
             catch (Exception ex)
             {
@@ -78,8 +78,8 @@ namespace ToDoList.Api.Controllers
         {
             try
             {
-                await _appService.DeleteById(id);
-                return Ok(new { success = true });
+                var result = await _appService.DeleteById(id);
+                return Ok(result);
             }
             catch (Exception ex)
             {
