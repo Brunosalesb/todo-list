@@ -9,7 +9,7 @@ namespace ToDoList.Api.Controllers
     [ApiController]
     [ApiVersion("1.0")]
     [Route("/v{version:apiVersion}/[controller]")]
-    public class ToDoController : ControllerBase
+    public class ToDoController : BaseController
     {
         private readonly IToDoAppService _appService;
         public ToDoController(IToDoAppService appService)
@@ -23,7 +23,7 @@ namespace ToDoList.Api.Controllers
             try
             {
                 var result = await _appService.GetAll();
-                return Ok(result);
+                return Response(result);
             }
             catch (Exception ex)
             {
@@ -37,7 +37,7 @@ namespace ToDoList.Api.Controllers
             try
             {
                 var result = await _appService.GetById(id);
-                return Ok(result);
+                return Response(result);
             }
             catch (Exception ex)
             {
@@ -51,7 +51,7 @@ namespace ToDoList.Api.Controllers
             try
             {
                 var result = await _appService.Post(request);
-                return Ok(result);
+                return Response(result);
             }
             catch (Exception ex)
             {
@@ -65,7 +65,7 @@ namespace ToDoList.Api.Controllers
             try
             {
                 var result = await _appService.Update(request);
-                return Ok(result);
+                return Response(result);
             }
             catch (Exception ex)
             {
@@ -79,7 +79,7 @@ namespace ToDoList.Api.Controllers
             try
             {
                 var result = await _appService.DeleteById(id);
-                return Ok(result);
+                return Response(result);
             }
             catch (Exception ex)
             {

@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using ToDoList.Domain.Shared;
+using ToDoList.Domain.Shared.Interfaces;
 using ToDoList.Infra.Contexts;
 
 namespace ToDoList.Data.Repositories
