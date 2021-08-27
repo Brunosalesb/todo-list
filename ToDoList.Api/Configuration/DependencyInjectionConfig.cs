@@ -28,7 +28,7 @@ namespace ToDoList.Api.Configuration
 
             services.AddScoped<IValidator<CreateToDoRequest>, CreateToDoRequestValidator>();
             services.AddScoped<IValidator<UpdateToDoRequest>, UpdateToDoRequestValidator>();
-            
+
             #endregion
         }
     }
