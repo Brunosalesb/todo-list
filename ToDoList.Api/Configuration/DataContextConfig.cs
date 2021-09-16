@@ -9,7 +9,7 @@ namespace ToDoList.Api.Configuration
     {
         public static void AddDataContextConfiguration(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<DataContext>(opt => opt.UseSqlServer(configuration.GetConnectionString("connectionString")));
+            services.AddDbContext<DataContext>(opt => opt.UseSqlServer(configuration.GetConnectionString("ConnectionString")));
         }
     }
 }

@@ -1,16 +1,16 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using ToDoList.Api.Services;
 
 namespace ToDoList.Api.Configuration
 {
     public static class JwtConfig
     {
-        public static void AddJWTConfiguration(this IServiceCollection services)
+        public static void AddJWTConfiguration(this IServiceCollection services, IConfiguration configuration)
         {
-            var key = Encoding.ASCII.GetBytes(Settings.Secret);
+            var key = Encoding.ASCII.GetBytes(configuration.GetValue<string>("Auth:Secret"));
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

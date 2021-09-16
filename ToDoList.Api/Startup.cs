@@ -21,7 +21,7 @@ namespace ToDoList.Api
         {
             services.AddControllers().AddFluentValidation(x => x.ValidatorOptions.LanguageManager.Culture = new System.Globalization.CultureInfo("en-US"));
 
-            services.AddJWTConfiguration();
+            services.AddJWTConfiguration(Configuration);
 
             services.AddApiVersioning();
 
