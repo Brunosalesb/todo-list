@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
 using ToDoList.Domain.SqlServer.Contracts.Request.User;
@@ -17,6 +18,7 @@ namespace ToDoList.Api.Controllers.v1
             _appService = appService;
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] CreateUserRequest request)
         {

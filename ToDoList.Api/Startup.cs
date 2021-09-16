@@ -21,6 +21,8 @@ namespace ToDoList.Api
         {
             services.AddControllers().AddFluentValidation(x => x.ValidatorOptions.LanguageManager.Culture = new System.Globalization.CultureInfo("en-US"));
 
+            services.AddJWTConfiguration();
+
             services.AddApiVersioning();
 
             services.AddCors();
@@ -46,11 +48,14 @@ namespace ToDoList.Api
 
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
+            app.UseAuthentication();
+
+            app.UseAuthorization();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
-
         }
     }
 }

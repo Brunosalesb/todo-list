@@ -8,6 +8,7 @@ namespace ToDoList.Infra.Contexts
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
         public DbSet<ToDo> ToDo { get; set; }
+        public DbSet<User> User { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

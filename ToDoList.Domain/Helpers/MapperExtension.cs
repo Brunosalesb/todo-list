@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using ToDoList.Domain.Shared;
 using ToDoList.Domain.SqlServer.Contracts.Response;
+using ToDoList.Domain.SqlServer.Contracts.Response.User;
 using ToDoList.Domain.SqlServer.Entities;
 
 namespace ToDoList.Domain.Helpers
@@ -46,6 +47,17 @@ namespace ToDoList.Domain.Helpers
                 Data = result,
                 Success = true
             };
+        }
+
+        public static GetUserAuthResponse MapGetUserAuthResponse(this User response)
+        {
+            var result = new GetUserAuthResponse()
+            {
+                Id = response.Id,
+                Email = response.Email
+            };
+
+            return result;
         }
     }
 }
