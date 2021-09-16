@@ -3,7 +3,6 @@ using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using ToDoList.Domain.SqlServer.Entities;
 
 namespace ToDoList.Api.Services
 {

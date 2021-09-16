@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
-using ToDoList.Data.Repositories;
 using ToDoList.Domain.SqlServer.Entities;
 using ToDoList.Domain.SqlServer.Interfaces;
 using ToDoList.Infra.Contexts;
