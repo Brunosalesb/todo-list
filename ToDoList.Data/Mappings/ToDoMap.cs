@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using ToDoList.Domain.SqlServer.Entities;
 
-namespace ToDoList.Infra.Mappings
+namespace ToDoList.Data.Mappings
 {
     public class ToDoMap : IEntityTypeConfiguration<ToDo>
     {

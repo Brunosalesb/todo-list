@@ -5,7 +5,7 @@ using ToDoList.Domain.SqlServer.Entities;
 using ToDoList.Domain.SqlServer.Interfaces;
 using ToDoList.Infra.Contexts;
 
-namespace ToDoList.Infra.Repositories
+namespace ToDoList.Data.Repositories
 {
     public class ToDoRepository : BaseRepository<ToDo>, IToDoRepository
     {

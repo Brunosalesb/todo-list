@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using ToDoList.Data.Mappings;
 using ToDoList.Domain.SqlServer.Entities;
-using ToDoList.Infra.Mappings;
 
 namespace ToDoList.Infra.Contexts
 {
@@ -12,6 +12,7 @@ namespace ToDoList.Infra.Contexts
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new ToDoMap());
+            modelBuilder.ApplyConfiguration(new UserMap());
         }
     }
 }

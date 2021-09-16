@@ -1,10 +1,10 @@
 ﻿using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using ToDoList.AppService;
+using ToDoList.Data.Repositories;
 using ToDoList.Domain.SqlServer.Contracts.Request;
 using ToDoList.Domain.SqlServer.Interfaces;
 using ToDoList.Domain.SqlServer.Validators;
-using ToDoList.Infra.Repositories;
 
 namespace ToDoList.Api.Configuration
 {
@@ -15,12 +15,14 @@ namespace ToDoList.Api.Configuration
             #region Repository
 
             services.AddScoped<IToDoRepository, ToDoRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
 
             #endregion
 
             #region AppService
 
             services.AddScoped<IToDoAppService, ToDoAppService>();
+            services.AddScoped<IUserAppService, UserAppService>();
 
             #endregion
 
