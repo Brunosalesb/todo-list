@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using ToDoList.Api.Services;
 using ToDoList.Domain.SqlServer.Contracts.Request.User;
 using ToDoList.Domain.SqlServer.Interfaces;
@@ -12,9 +13,12 @@ namespace ToDoList.Api.Controllers
     public class AuthController : BaseController
     {
         private readonly IUserRepository _repository;
-        public AuthController(IUserRepository repository)
+        public IConfiguration _configuration { get; }
+
+        public AuthController(IUserRepository repository, IConfiguration configuration)
         {
             _repository = repository;
+            _configuration = configuration;
         }
 
         [AllowAnonymous]
@@ -26,7 +30,7 @@ namespace ToDoList.Api.Controllers
             if (user == null)
                 return NotFound(new { message = "Invalid credentials" });
 
-            var token = TokenService.GenerateToken(user.Id.ToString(), user.Email);
+            var token = TokenService.GenerateToken(user.Id.ToString(), user.Email, _configuration);
 
             return new
             {
