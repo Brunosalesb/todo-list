@@ -13,7 +13,7 @@ namespace ToDoList.Api.Controllers
     public class AuthController : BaseController
     {
         private readonly IUserRepository _repository;
-        public IConfiguration _configuration { get; }
+        private readonly IConfiguration _configuration;
 
         public AuthController(IUserRepository repository, IConfiguration configuration)
         {

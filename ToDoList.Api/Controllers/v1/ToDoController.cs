@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
 using ToDoList.Domain.SqlServer.Contracts.Request;
+using ToDoList.Domain.SqlServer.Entities;
 using ToDoList.Domain.SqlServer.Interfaces;
 
 namespace ToDoList.Api.Controllers
@@ -14,9 +16,12 @@ namespace ToDoList.Api.Controllers
     public class ToDoController : BaseController
     {
         private readonly IToDoAppService _appService;
-        public ToDoController(IToDoAppService appService)
+        private readonly ILogger<ToDo> _logger;
+
+        public ToDoController(IToDoAppService appService, ILogger<ToDo> logger)
         {
             _appService = appService;
+            _logger = logger;
         }
 
         [HttpGet]
@@ -29,6 +34,7 @@ namespace ToDoList.Api.Controllers
             }
             catch (Exception ex)
             {
+                _logger.LogError("ERROR: {message}", ex.Message);
                 return BadRequest(ex);
             }
         }
@@ -43,6 +49,7 @@ namespace ToDoList.Api.Controllers
             }
             catch (Exception ex)
             {
+                _logger.LogError("ERROR: {message}", ex.Message);
                 return BadRequest(ex);
             }
         }
@@ -57,6 +64,7 @@ namespace ToDoList.Api.Controllers
             }
             catch (Exception ex)
             {
+                _logger.LogError("ERROR: {message}", ex.Message);
                 return BadRequest(ex);
             }
         }
@@ -71,6 +79,7 @@ namespace ToDoList.Api.Controllers
             }
             catch (Exception ex)
             {
+                _logger.LogError("ERROR: {message}", ex.Message);
                 return BadRequest(ex);
             }
         }
@@ -85,6 +94,7 @@ namespace ToDoList.Api.Controllers
             }
             catch (Exception ex)
             {
+                _logger.LogError("ERROR: {message}", ex.Message);
                 return BadRequest(ex);
             }
         }
