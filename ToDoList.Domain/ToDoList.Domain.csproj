@@ -6,16 +6,15 @@
 
   <ItemGroup>
     <Compile Remove="SqlServer\Contracts\Responses\**" />
+    <Compile Remove="SqlServer\Validators\User\**" />
     <EmbeddedResource Remove="SqlServer\Contracts\Responses\**" />
+    <EmbeddedResource Remove="SqlServer\Validators\User\**" />
     <None Remove="SqlServer\Contracts\Responses\**" />
+    <None Remove="SqlServer\Validators\User\**" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="FluentValidation.AspNetCore" Version="10.3.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="SqlServer\Validators\User\" />
   </ItemGroup>
 
 </Project>
