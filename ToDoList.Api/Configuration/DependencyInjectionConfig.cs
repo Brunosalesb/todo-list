@@ -2,6 +2,8 @@
 using Microsoft.Extensions.DependencyInjection;
 using ToDoList.AppService;
 using ToDoList.Data.Repositories;
+using ToDoList.Data.Transactions;
+using ToDoList.Domain.Shared.Transactions;
 using ToDoList.Domain.SqlServer.Contracts.Request;
 using ToDoList.Domain.SqlServer.Interfaces;
 using ToDoList.Domain.SqlServer.Validators;
@@ -31,6 +33,12 @@ namespace ToDoList.Api.Configuration
             services.AddScoped<IValidator<CreateToDoRequest>, CreateToDoRequestValidator>();
             services.AddScoped<IValidator<UpdateToDoRequest>, UpdateToDoRequestValidator>();
 
+            #endregion
+
+            #region Others
+
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            
             #endregion
         }
     }

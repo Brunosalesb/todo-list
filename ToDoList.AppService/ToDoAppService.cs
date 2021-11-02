@@ -2,6 +2,7 @@
 using ToDoList.Domain.Helpers;
 using ToDoList.Domain.Shared;
 using ToDoList.Domain.Shared.Enums;
+using ToDoList.Domain.Shared.Transactions;
 using ToDoList.Domain.SqlServer.Contracts.Request;
 using ToDoList.Domain.SqlServer.Entities;
 using ToDoList.Domain.SqlServer.Interfaces;
@@ -11,10 +12,12 @@ namespace ToDoList.AppService
     public class ToDoAppService : BaseService, IToDoAppService
     {
         private readonly IToDoRepository _repository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public ToDoAppService(IToDoRepository repository)
+        public ToDoAppService(IToDoRepository repository, IUnitOfWork unitOfWork)
         {
             _repository = repository;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<ResultData> DeleteById(int id)
@@ -24,6 +27,8 @@ namespace ToDoList.AppService
                 return ErrorData(EGenericErrors.No_Records_Found.GetDescription());
 
             await _repository.Delete(toDo);
+            _unitOfWork.Commit();
+
             return SuccessData(EGenericOperations.Record_Deleted_Successfully.GetDescription());
         }
 
@@ -48,7 +53,10 @@ namespace ToDoList.AppService
         public async Task<ResultData> Post(CreateToDoRequest request)
         {
             var toDo = new ToDo(request);
+
             await _repository.Create(toDo);
+            _unitOfWork.Commit();
+
             return SuccessData(EGenericOperations.Record_Saved_Successfully.GetDescription());
         }
 
@@ -62,6 +70,8 @@ namespace ToDoList.AppService
             toDo.Update(request);
 
             await _repository.Update(toDo);
+            _unitOfWork.Commit();
+
             return SuccessData(EGenericOperations.Record_Updated_Successfully.GetDescription());
         }
     }

@@ -24,14 +24,12 @@ namespace ToDoList.Data.Repositories
         public async Task Create(T entity)
         {
             await entities.AddAsync(entity);
-            await _context.SaveChangesAsync();
             _logger.LogWarning("INSERT: {properties}", JsonSerializer.Serialize(entity));
         }
 
         public async Task Delete(T entity)
         {
             entities.Remove(entity);
-            await _context.SaveChangesAsync();
             _logger.LogWarning("DELETE: {properties}", JsonSerializer.Serialize(entity));
         }
 
@@ -52,7 +50,6 @@ namespace ToDoList.Data.Repositories
         public async Task Update(T entity)
         {
             _context.Entry(entity).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
             _logger.LogWarning("UPDATE: {properties}", JsonSerializer.Serialize(entity));
         }
     }
