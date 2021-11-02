@@ -38,7 +38,7 @@ namespace ToDoList.Api.Configuration
             #region Others
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            
+
             #endregion
         }
     }

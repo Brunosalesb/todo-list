@@ -23,7 +23,7 @@ namespace ToDoList.AppService
         public async Task<ResultData> Post(CreateUserRequest request)
         {
             var user = new User(request.Email, request.Password);
-            
+
             await _repository.Create(user);
             _unitOfWork.Commit();
 
